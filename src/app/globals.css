@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+html.dark {
+  --bg-base: #0B2E33;
+  --bg-card: rgba(79,124,130,0.10);
+  --bg-card-hover: rgba(79,124,130,0.18);
+  --bg-nav: rgba(11,46,51,0.85);
+  --border-subtle: rgba(79,124,130,0.30);
+  --border-hover: rgba(184,227,233,0.45);
+  --border-nav: rgba(184,227,233,0.18);
+  --accent: #B8E3E9;
+  --accent-mid: #93B1B5;
+  --accent-dim: #4F7C82;
+  --text-primary: #EAF4F4;
+  --text-secondary: #93B1B5;
+  --text-muted: #4F7C82;
+  --input-bg: rgba(79,124,130,0.10);
+  --input-border: rgba(79,124,130,0.35);
+  --shadow-card: 0 20px 60px rgba(0,0,0,0.45);
+  --nav-pill: rgba(184,227,233,0.14);
+}
+
+html.light {
+  --bg-base: #F0F9FA;
+  --bg-card: rgba(79,124,130,0.06);
+  --bg-card-hover: rgba(79,124,130,0.12);
+  --bg-nav: rgba(240,249,250,0.90);
+  --border-subtle: rgba(79,124,130,0.20);
+  --border-hover: rgba(79,124,130,0.55);
+  --border-nav: rgba(79,124,130,0.22);
+  --accent: #2A6B74;
+  --accent-mid: #3D7D87;
+  --accent-dim: #5A9EA8;
+  --text-primary: #0D2E33;
+  --text-secondary: #2A5A62;
+  --text-muted: #4F7C82;
+  --input-bg: rgba(79,124,130,0.06);
+  --input-border: rgba(79,124,130,0.25);
+  --shadow-card: 0 8px 32px rgba(11,46,51,0.10);
+  --nav-pill: rgba(42,107,116,0.12);
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+  h1,h2,h3,h4,h5,h6 { font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: rgba(79,124,130,0.4); border-radius: 4px; }
