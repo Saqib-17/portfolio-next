@@ -43,7 +43,7 @@ export function Hero() {
                 View Work <FiArrowRight className="w-4 h-4" />
               </motion.a>
               <motion.a whileHover={{ y: -3 }} href="#contact" className="px-7 py-4 rounded-full font-medium text-base" style={{ border: "1px solid var(--border-subtle)", color: "var(--text-secondary)", fontFamily: "Space Grotesk, sans-serif" }}>Contact</motion.a>
-              <motion.a whileHover={{ y: -3 }} href="https://github.com/sakib17shahidul" target="_blank" rel="noreferrer" className="p-3 rounded-full" style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }}>
+              <motion.a whileHover={{ y: -3 }} href="https://github.com/Saqib-17" target="_blank" rel="noreferrer" className="p-3 rounded-full" style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)", color: "var(--text-secondary)" }}>
                 <FiGithub size={20} />
               </motion.a>
             </motion.div>

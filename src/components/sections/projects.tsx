@@ -19,16 +19,16 @@ const PROJECTS = [
     category: "Smart Farming Platform",
     description: "Built a full-stack smart agriculture platform during a hackathon. Implemented real-time weather integration and a comprehensive crop tracking system.",
     tech: ["Next.js","Node.js","Express.js","MongoDB","Firebase"],
-    link: "#",
+    link: "https://agri-shield-xi.vercel.app/",
     image: "/images/agri.png",
     accent: ["#93B1B5","#3D7D87"],
   },
   {
     title: "QuizWhiz",
     category: "Educational Platform",
-    description: "Developed an interactive quiz-based learning platform with frontend dashboards and robust backend logic. Built for both web and mobile.",
-    tech: ["React","Node.js","Express.js","MongoDB","React Native"],
-    link: "#",
+    description: "Developed an interactive quiz-based learning platform with frontend dashboards and robust backend logic.",
+    tech: ["React","Node.js","Express.js","MongoDB"],
+    link: "https://quiz-whiz-frontend.vercel.app/",
     image: "/images/quiz.png",
     accent: ["#B8E3E9","#2A6B74"],
   },
@@ -48,7 +48,7 @@ export function Projects() {
             <motion.div initial={{ width: 0 }} whileInView={{ width: 80 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 0.6 }} className="h-1 rounded-full mb-6" style={{ background: "var(--accent-dim)" }} />
             <p className="max-w-xl text-lg xl:text-xl" style={{ color: "var(--text-secondary)" }}>Case studies of full-stack applications showcasing problem-solving and architectural decisions.</p>
           </div>
-          <motion.a whileHover={{ y: -3 }} href="https://github.com/sakib17shahidul" target="_blank" rel="noreferrer"
+          <motion.a whileHover={{ y: -3 }} href="https://github.com/Saqib-17" target="_blank" rel="noreferrer"
             className="inline-flex items-center gap-2 text-sm font-bold px-6 py-3 rounded-full"
             style={{ background: "var(--accent)", color: isDark ? "#0B2E33" : "#fff", fontFamily: "Space Grotesk, sans-serif" }}>
             <FiGithub size={18} /> View GitHub

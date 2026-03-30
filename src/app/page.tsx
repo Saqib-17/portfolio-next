@@ -21,7 +21,7 @@ function Page() {
       <ContactForm />
       <footer style={{ borderTop: "1px solid var(--border-subtle)", color: "var(--text-muted)", backgroundColor: "var(--bg-base)" }}
         className="py-8 text-center text-sm relative z-10">
-        © {new Date().getFullYear()} MD. Shahidul Islam Sakib — Built with Next.js & Tailwind CSS
+        © {new Date().getFullYear()} All rights reserved. | Designed & Developed by MD. Shahidul Islam Sakib
       </footer>
     </main>
   );

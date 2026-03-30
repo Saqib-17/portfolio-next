@@ -71,7 +71,7 @@ export function ContactForm() {
             {[
               { label: "Email",  href: "mailto:sakib17shahidul@gmail.com", icon: <FiMail size={16} /> },
               { label: "Phone",  href: "tel:+8801892044897",               icon: <FiPhone size={16} /> },
-              { label: "GitHub", href: "https://github.com/sakib17shahidul", icon: <FiGithub size={16} /> },
+              { label: "GitHub", href: "https://github.com/Saqib-17", icon: <FiGithub size={16} /> },
             ].map(({ label, href, icon }) => (
               <motion.a key={label} href={href} whileHover={{ y: -3 }} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer"
                 className="flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full"
