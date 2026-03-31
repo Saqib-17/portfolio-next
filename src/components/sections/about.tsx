@@ -68,9 +68,9 @@ export function About() {
               <h3 className="text-lg xl:text-xl font-bold mb-5" style={{ color: "var(--text-primary)", fontFamily: "Space Grotesk, sans-serif" }}>Achievements</h3>
               <ul className="space-y-4 text-sm xl:text-base" style={{ color: "var(--text-secondary)" }}>
                 {[
-                  { icon: <FaGraduationCap size={13} />, text: "Dean's List (3 consecutive semesters)" },
-                  { icon: <FaTrophy size={13} />, text: "Intern of the Month – Aspire Program" },
-                  { icon: <FiBriefcase size={13} />, text: "Host – Industry Skills Workshop" },
+                  { icon: <FaGraduationCap size={13} />, text: "Dean's List Award (3 consecutive semesters)" },
+                  { icon: <FaTrophy size={13} />, text: "Intern of the Month – Aspire Internship Program" },
+                  { icon: <FiBriefcase size={13} />, text: "Host & Facilitator – Industry Skills Workshop" },
                   { icon: <FiCode size={13} />, text: "Participant – EDU HackFest 2025" },
                 ].map(({ icon, text }) => (
                   <li key={text} className="flex items-start gap-3">
