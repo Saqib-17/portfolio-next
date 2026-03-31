@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { FiExternalLink, FiArrowLeft } from "react-icons/fi";
 import { useTheme } from "@/contexts/theme-context";
 
@@ -146,165 +146,135 @@ export default function ProjectsPage() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section className="py-28 xl:py-36 relative min-h-screen">
+    <section className="py-28 xl:py-36 min-h-screen bg-[#f4f7f8] dark:bg-[#0B2E33]">
       <div className="container mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 max-w-screen-2xl">
-
-        {/* Header (MATCHED STYLE) */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-16 xl:mb-20 flex flex-col gap-6"
-        >
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm"
-            style={{ color: "var(--text-secondary)" }}
-          >
+        {/* Header */}
+        <div className="mb-16 xl:mb-20 flex flex-col gap-6">
+          <Link href="/" className="inline-flex items-center gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
             <FiArrowLeft /> Back
           </Link>
-
           <div>
-            <h2
-              className="text-4xl sm:text-5xl xl:text-6xl font-bold mb-4"
-              style={{
-                color: "var(--text-primary)",
-                fontFamily: "Space Grotesk, sans-serif",
-              }}
-            >
+            <h2 className="text-4xl sm:text-5xl xl:text-6xl font-bold mb-4" style={{ color: "var(--text-primary)", fontFamily: "Space Grotesk, sans-serif" }}>
               All <span style={{ color: "var(--accent)" }}>Projects</span>
             </h2>
-
-            <div
-              className="h-1 w-20 rounded-full mb-6"
-              style={{ background: "var(--accent-dim)" }}
-            />
-
-            <p
-              className="max-w-xl text-lg xl:text-xl"
-              style={{ color: "var(--text-secondary)" }}
-            >
+            <div className="h-1 w-20 rounded-full mb-6" style={{ background: "var(--accent-dim)" }} />
+            <p className="max-w-xl text-lg xl:text-xl" style={{ color: "var(--text-secondary)" }}>
               Complete list of my full-stack and frontend work.
             </p>
           </div>
-        </motion.div>
+        </div>
 
-        {/* SAME CARD DESIGN */}
-        <div className="space-y-6 xl:space-y-8">
+        {/* Creative Portfolio Grid */}
+        <div className="flex flex-col gap-16">
           {PROJECTS.map((project, index) => {
-            const accent = isDark
-              ? project.accent[0]
-              : project.accent[1];
+            const accent = isDark ? project.accent[0] : project.accent[1];
+            const isHovered = hovered === index;
+
+            // Alternate layout left/right for desktop
+            const isEven = index % 2 === 0;
 
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.08 }}
-                className="group relative rounded-2xl overflow-hidden cursor-pointer"
-                style={{
-                  border:
-                    hovered === index
-                      ? `1px solid ${accent}88`
-                      : "1px solid rgba(79,124,130,0.30)",
-                  transform:
-                    hovered === index
-                      ? "translateY(-5px)"
-                      : "translateY(0)",
-                  transition: "all 0.35s",
-                  boxShadow:
-                    hovered === index
-                      ? "0 24px 70px rgba(0,0,0,0.5)"
-                      : "none",
-                }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
+                className={`relative flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} items-center md:gap-12`}
               >
-                {/* Background */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundImage: `url(${project.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center top",
-                    transform:
-                      hovered === index
-                        ? "scale(1.04)"
-                        : "scale(1)",
-                    transition: "transform 0.7s ease",
-                    filter: isDark
-                      ? "brightness(0.45) saturate(0.75)"
-                      : "brightness(0.55) saturate(0.8)",
-                  }}
-                />
-
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E33]/95 via-[#0B2E33]/85 to-[#0B2E33]/60" />
-
-                {/* Accent Line */}
-                <div
-                  className="absolute left-0 top-0 bottom-0 w-1"
-                  style={{ background: `${accent}80` }}
-                />
-
-                {/* Index */}
-                <div
-                  className="absolute right-6 top-2 font-bold hidden sm:block"
-                  style={{
-                    color: `${accent}10`,
-                    fontSize: "clamp(80px, 10vw, 120px)",
-                    fontFamily: "Space Grotesk, sans-serif",
-                  }}
+                {/* Image */}
+                <motion.div
+                  className="w-full md:w-1/2 overflow-hidden rounded-3xl shadow-2xl"
+                  animate={{ scale: isHovered ? 1.08 : 1 }}
+                  transition={{ type: "spring", stiffness: 100, damping: 12 }}
+                  style={{ zIndex: 10 }}
                 >
-                  {String(index + 1).padStart(2, "0")}
-                </div>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-80 object-cover rounded-3xl transition-transform duration-700"
+                  />
+                  {/* Glowing accent border on hover */}
+                  {isHovered && (
+                    <div className="absolute inset-0 rounded-3xl pointer-events-none"
+                      style={{
+                        boxShadow: `0 0 40px 5px ${accent}55`,
+                        borderRadius: "1rem",
+                      }}
+                    />
+                  )}
+                </motion.div>
 
                 {/* Content */}
-                <div className="relative z-10 p-7 xl:p-10 flex flex-col md:flex-row gap-8 items-start md:items-center">
-                  <div className="flex-1">
-                    <p
-                      className="text-xs font-bold uppercase mb-2"
-                      style={{ color: accent }}
-                    >
-                      {project.category}
-                    </p>
+                <motion.div
+                  className="mt-6 md:mt-0 w-full md:w-1/2 flex flex-col gap-4 relative z-20"
+                  initial={{ x: isEven ? -50 : 50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.7 }}
+                >
+                  <p className="text-xs font-bold uppercase" style={{ color: accent }}>
+                    {project.category}
+                  </p>
+                  <h3 className="text-3xl font-bold text-[#0B2E33] dark:text-[#EAF4F4]">
+                    {project.title}
+                  </h3>
+                  <p className="text-base text-[#3A4C4F] dark:text-[#c8dfe2]">{project.description}</p>
 
-                    <h3 className="text-2xl xl:text-3xl font-bold mb-3 text-[#EAF4F4]">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-base xl:text-lg text-[#c8dfe2] max-w-2xl">
-                      {project.description}
-                    </p>
+                  {/* Tech stack badges */}
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {project.tech.map((tech, i) => (
+                      <motion.span
+                        key={tech}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: i * 0.05 + 0.1 }}
+                        className="px-3 py-1.5 text-xs rounded-full font-medium"
+                        style={{
+                          background: `linear-gradient(90deg, ${accent}33, ${accent}55)`,
+                          color: accent,
+                        }}
+                      >
+                        {tech}
+                      </motion.span>
+                    ))}
                   </div>
 
-                  <div className="flex flex-col gap-5 md:items-end">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1.5 text-xs rounded-full"
-                          style={{
-                            background: "rgba(11,46,51,0.82)",
-                            border: `1px solid ${accent}44`,
-                            color: accent,
-                          }}
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      className="inline-flex items-center gap-2 text-sm font-bold"
-                      style={{ color: accent }}
+                  {/* View Project */}
+                  <motion.a
+                    href={project.link}
+                    target="_blank"
+                    className="mt-4 inline-flex items-center gap-2 font-bold text-sm group"
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    style={{ color: accent }}
+                  >
+                    View Project
+                    <motion.span
+                      className="inline-block"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      View Project <FiExternalLink size={15} />
-                    </a>
-                  </div>
-                </div>
+                      <FiExternalLink size={15} />
+                    </motion.span>
+                  </motion.a>
+                </motion.div>
+
+                {/* Floating Shapes */}
+                {isHovered && (
+                  <>
+                    <motion.div
+                      className="absolute w-24 h-24 bg-gradient-to-r from-[#B8E3E9]/50 to-[#2A6B74]/50 rounded-full filter blur-3xl -top-10 -left-10 pointer-events-none"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1, opacity: 0.5 }}
+                      transition={{ duration: 0.6 }}
+                    />
+                    <motion.div
+                      className="absolute w-20 h-20 bg-gradient-to-r from-[#93B1B5]/50 to-[#3D7D87]/50 rounded-full filter blur-3xl -bottom-10 -right-10 pointer-events-none"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1, opacity: 0.5 }}
+                      transition={{ duration: 0.6 }}
+                    />
+                  </>
+                )}
               </motion.div>
             );
           })}
