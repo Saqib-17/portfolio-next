@@ -146,7 +146,7 @@ export default function ProjectsPage() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section className="py-28 xl:py-36 min-h-screen bg-[#f4f7f8] dark:bg-[#0B2E33]">
+    <section className="py-10 xl:py-16 min-h-screen bg-[#f4f7f8] dark:bg-[#0B2E33]">
       <div className="container mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 max-w-screen-2xl">
         {/* Header */}
         <div className="mb-16 xl:mb-20 flex flex-col gap-6">
