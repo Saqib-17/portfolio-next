@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiExternalLink, FiGithub, FiArrowRight } from "react-icons/fi";
 import { useTheme } from "@/contexts/theme-context";
@@ -91,11 +92,20 @@ export function Projects() {
         </div>
 
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.35 }} className="mt-12 flex justify-center">
-          <motion.a whileHover={{ y: -3 }} href="https://github.com/sakib17shahidul" target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full font-bold text-sm"
-            style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)", color: "var(--accent)", fontFamily: "Space Grotesk, sans-serif" }}>
-            View More Projects <FiArrowRight size={16} />
-          </motion.a>
+          <Link href="/projects">
+  <motion.span
+    whileHover={{ y: -3 }}
+    className="inline-flex items-center gap-2 px-10 py-4 rounded-full font-bold text-sm"
+    style={{
+      background: "var(--bg-card)",
+      border: "1px solid var(--border-subtle)",
+      color: "var(--accent)",
+      fontFamily: "Space Grotesk, sans-serif"
+    }}
+  >
+    View More Projects <FiArrowRight size={16} />
+  </motion.span>
+</Link>
         </motion.div>
       </div>
     </section>
