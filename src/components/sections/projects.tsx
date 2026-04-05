@@ -126,7 +126,7 @@ export function Projects() {
         backgroundImage: `url(${project.image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        transform: hovered === index ? "scale(1)" : "scale(1.08)", // 👈 zoom OUT
+        transform: hovered === index ? "scale(1)" : "scale(1.08)", 
         transition: "transform 0.8s ease",
         filter: isDark
           ? "brightness(0.6)"
