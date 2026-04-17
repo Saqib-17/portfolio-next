@@ -37,6 +37,15 @@ const PROJECTS = [
     image: "/images/quiz.png",
     accent: ["#B8E3E9","#2A6B74"],
   },
+  {
+  "title": "Diecasto",
+  "category": "E-commerce Website",
+  "description": "Designed and developed a modern diecast model car e-commerce platform featuring product listings, detailed pages, and interactive UI components. Implemented responsive design, optimized performance, and smooth navigation to enhance user experience.",
+  "tech": ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+  "link": "https://diecasto-saqib.vercel.app/",
+  "image": "/images/diecasto.png",
+   accent: ["#B8E3E9","#2A6B74"],
+},
 {
     title: "Investmate Frontend",
     category: "Finance Application",
