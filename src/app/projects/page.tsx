@@ -5,18 +5,18 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useTheme } from "@/contexts/theme-context";
 
 const PROJECTS = [
-   {
-    title:
-      "Vehicle Detection",
+  {
+    title: "Vehicle Detection",
     category: "Undergraduate Thesis",
     description:
       "A comparative study of YOLOv8s and YOLOv10s for detecting vehicles under different foggy conditions. The study explores curriculum training and lightweight image preprocessing to improve detection performance in challenging visibility.",
     tech: ["YOLOv8s", "YOLOv10s", "Python", "Computer Vision"],
     link: "/Multi-Stage_vehicle_Detection_under_Foggy_condition.pdf",
     image: "/images/research.jpg",
-    accent: ["#B8E3E9", "#2A6B74"],
+    year: "2026",
   },
   {
     title: "Aspire Internship Program",
@@ -26,7 +26,7 @@ const PROJECTS = [
     tech: ["Next.js", "React", "Tailwind CSS", "EmailJS"],
     link: "https://aspire-internship.vercel.app",
     image: "/images/aspire.png",
-    accent: ["#B8E3E9", "#2A6B74"],
+    year: "2026",
   },
   {
     title: "Agri-Shield",
@@ -36,7 +36,7 @@ const PROJECTS = [
     tech: ["Next.js", "Node.js", "Express.js", "MongoDB", "Firebase"],
     link: "https://agri-shield-xi.vercel.app/",
     image: "/images/agri.png",
-    accent: ["#93B1B5", "#3D7D87"],
+    year: "2026",
   },
   {
     title: "QuizWhiz",
@@ -46,7 +46,7 @@ const PROJECTS = [
     tech: ["React", "Node.js", "Express.js", "MongoDB"],
     link: "https://quiz-whiz-frontend.vercel.app/",
     image: "/images/quiz.png",
-    accent: ["#B8E3E9", "#2A6B74"],
+    year: "2024",
   },
   {
     title: "Diecasto",
@@ -56,7 +56,7 @@ const PROJECTS = [
     tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     link: "https://diecasto-saqib.vercel.app/",
     image: "/images/diecasto.png",
-    accent: ["#B8E3E9", "#2A6B74"],
+    year: "2026",
   },
   {
     title: "Investmate Frontend",
@@ -66,7 +66,7 @@ const PROJECTS = [
     tech: ["Next.js", "React", "Tailwind"],
     link: "https://investmate-nextjs.vercel.app/",
     image: "/images/investmate.png",
-    accent: ["#B8E3E9", "#2A6B74"],
+    year: "2026",
   },
   {
     title: "Investmate Backend",
@@ -76,7 +76,7 @@ const PROJECTS = [
     tech: ["Node.js", "Express.js", "MongoDB"],
     link: "https://investmate-backend-1.onrender.com/",
     image: "/images/backend.png",
-    accent: ["#93B1B5", "#3D7D87"],
+    year: "2026",
   },
   {
     title: "Green Earth",
@@ -86,7 +86,7 @@ const PROJECTS = [
     tech: ["Next.js", "React", "Tailwind", "JSON"],
     link: "https://green-earth-ebon.vercel.app/",
     image: "/images/greenearth.png",
-    accent: ["#B8E3E9", "#2A6B74"],
+    year: "2025",
   },
   {
     title: "Flower Mart",
@@ -96,7 +96,7 @@ const PROJECTS = [
     tech: ["React", "Tailwind", "React Router", "API"],
     link: "https://flower-mart.netlify.app/",
     image: "/images/flowermart.png",
-    accent: ["#93B1B5", "#3D7D87"],
+    year: "2025",
   },
   {
     title: "NexMail AI",
@@ -106,7 +106,7 @@ const PROJECTS = [
     tech: ["Next.js", "Node.js", "AI"],
     link: "https://nexmail-ai.thenexgenix.com/",
     image: "/images/nexmail.png",
-    accent: ["#B8E3E9", "#2A6B74"],
+    year: "2025",
   },
   {
     title: "Etutor Frontend",
@@ -116,7 +116,7 @@ const PROJECTS = [
     tech: ["React", "Next.js", "Tailwind"],
     link: "https://github.com/thenexgenix/etutor",
     image: "/images/etutor.png",
-    accent: ["#93B1B5", "#3D7D87"],
+    year: "2025",
   },
   {
     title: "Ainbondhu",
@@ -126,7 +126,7 @@ const PROJECTS = [
     tech: ["React", "Next.js", "Tailwind"],
     link: "https://github.com/thenexgenix/AinBondu-Frontend",
     image: "/images/ainbondhu.png",
-    accent: ["#B8E3E9", "#2A6B74"],
+    year: "2026",
   },
   {
     title: "QuizWhiz Mobile App",
@@ -143,7 +143,7 @@ const PROJECTS = [
     ],
     link: "https://github.com/Saqib-17/QuizWhiz-Mobile-App",
     image: "/images/mobileapp.png",
-    accent: ["#93B1B5", "#3D7D87"],
+    year: "2025",
   },
   {
     title: "Donation BD",
@@ -160,7 +160,7 @@ const PROJECTS = [
     ],
     link: "https://donation-client-six.vercel.app/",
     image: "/images/donationbd.png",
-    accent: ["#B8E3E9", "#2A6B74"],
+    year: "2025",
   },
   {
     title: "Smart Street Light System",
@@ -170,19 +170,63 @@ const PROJECTS = [
     tech: ["Arduino", "IR Sensor", "ESP8266", "React", "Node.js"],
     link: "https://github.com/Saqib-17/smart-street-light-project",
     image: "/images/iot.png",
-    accent: ["#93B1B5", "#3D7D87"],
-  }
- 
+    year: "2025",
+  },
 ];
 
 const EASE = [0.22, 1, 0.36, 1];
 
 export default function WorkPage() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   const active = PROJECTS[activeIndex];
 
-  /* auto slide */
+  const colors = {
+    background: isDark ? "#0B2E33" : "#F0F9FA",
+
+    backgroundTop: isDark ? "#123D43" : "#F7FCFC",
+
+    card: isDark
+      ? "rgba(79,124,130,0.10)"
+      : "rgba(79,124,130,0.06)",
+
+    cardStrong: isDark
+      ? "rgba(79,124,130,0.16)"
+      : "rgba(79,124,130,0.10)",
+
+    border: isDark
+      ? "rgba(79,124,130,0.30)"
+      : "rgba(79,124,130,0.20)",
+
+    borderLight: isDark
+      ? "rgba(184,227,233,0.12)"
+      : "rgba(79,124,130,0.15)",
+
+    accent: isDark ? "#B8E3E9" : "#2A6B74",
+
+    accentMid: isDark ? "#93B1B5" : "#3D7D87",
+
+    accentDim: isDark ? "#4F7C82" : "#5A9EA8",
+
+    text: isDark ? "#EAF4F4" : "#0D2E33",
+
+    textSecondary: isDark ? "#93B1B5" : "#2A5A62",
+
+    textMuted: "#4F7C82",
+
+    glass: isDark
+      ? "rgba(15,40,44,0.62)"
+      : "rgba(240,249,250,0.72)",
+
+    imageOverlay: isDark
+      ? "linear-gradient(180deg,rgba(11,46,51,0.04) 0%,transparent 38%,rgba(5,30,34,0.92) 100%)"
+      : "linear-gradient(180deg,rgba(11,46,51,0.02) 0%,transparent 38%,rgba(11,46,51,0.78) 100%)",
+  };
+
+  /* AUTO SLIDE */
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % PROJECTS.length);
@@ -191,7 +235,7 @@ export default function WorkPage() {
     return () => clearInterval(interval);
   }, []);
 
-  /* swipe */
+  /* PAGINATION */
   const paginate = (direction) => {
     if (direction > 0) {
       setActiveIndex((prev) => (prev + 1) % PROJECTS.length);
@@ -202,30 +246,41 @@ export default function WorkPage() {
     }
   };
 
+  /* SWIPE */
   const handleDragEnd = (_, info) => {
     const threshold = 80;
 
-    if (info.offset.x < -threshold) paginate(1);
-    else if (info.offset.x > threshold) paginate(-1);
+    if (info.offset.x < -threshold) {
+      paginate(1);
+    } else if (info.offset.x > threshold) {
+      paginate(-1);
+    }
   };
 
   return (
     <section
-      className="relative overflow-hidden bg-[#050816] text-white"
+      className="relative min-h-screen overflow-hidden"
       style={{
+        background: colors.background,
+        color: colors.text,
         fontFamily: "'Inter', sans-serif",
       }}
     >
-      {/* bg */}
+      {/* =========================
+          BACKGROUND
+      ========================== */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* MAIN GRADIENT */}
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "radial-gradient(circle at top left,#0c1730 0%,#060814 42%,#05070f 100%)",
+            background: isDark
+              ? "radial-gradient(circle at top left,#123D43 0%,#0B2E33 42%,#08272B 100%)"
+              : "radial-gradient(circle at top left,#F7FCFC 0%,#F0F9FA 48%,#E8F4F5 100%)",
           }}
         />
 
+        {/* LEFT GLOW */}
         <div
           className="absolute rounded-full"
           style={{
@@ -233,11 +288,14 @@ export default function WorkPage() {
             height: "28rem",
             left: "-12rem",
             top: "18%",
-            background: "rgba(216,184,96,0.10)",
+            background: isDark
+              ? "rgba(184,227,233,0.07)"
+              : "rgba(42,107,116,0.07)",
             filter: "blur(120px)",
           }}
         />
 
+        {/* RIGHT GLOW */}
         <div
           className="absolute rounded-full"
           style={{
@@ -245,30 +303,39 @@ export default function WorkPage() {
             height: "26rem",
             right: "-8rem",
             top: "-4rem",
-            background: "rgba(58,91,255,0.10)",
+            background: isDark
+              ? "rgba(79,124,130,0.10)"
+              : "rgba(90,158,168,0.08)",
             filter: "blur(120px)",
           }}
         />
 
+        {/* GRID */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0"
           style={{
-            backgroundImage:
-              "linear-gradient(to right,#fff 1px,transparent 1px),linear-gradient(to bottom,#fff 1px,transparent 1px)",
+            opacity: isDark ? 0.025 : 0.035,
+            backgroundImage: isDark
+              ? "linear-gradient(to right,#B8E3E9 1px,transparent 1px),linear-gradient(to bottom,#B8E3E9 1px,transparent 1px)"
+              : "linear-gradient(to right,#2A6B74 1px,transparent 1px),linear-gradient(to bottom,#2A6B74 1px,transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />
       </div>
 
-      {/* mobile + tablet */}
-      <div className="block lg:hidden px-4 py-5 sm:px-6">
+      {/* =========================
+          MOBILE + TABLET
+      ========================== */}
+      <div className="block px-4 py-5 sm:px-6 lg:hidden">
         {/* TOP */}
         <div className="mb-5 flex items-center justify-between">
           <div
             className="inline-flex items-center rounded-full border"
             style={{
-              borderColor: "rgba(216,184,96,0.2)",
-              background: "rgba(216,184,96,0.06)",
+              borderColor: colors.border,
+              background: isDark
+                ? "rgba(184,227,233,0.06)"
+                : "rgba(42,107,116,0.06)",
               padding: "0.32rem 0.7rem",
             }}
           >
@@ -276,7 +343,7 @@ export default function WorkPage() {
               style={{
                 fontSize: 9,
                 letterSpacing: "0.15em",
-                color: "#d8b860",
+                color: colors.accent,
               }}
             >
               FEATURED WORK
@@ -288,7 +355,7 @@ export default function WorkPage() {
               style={{
                 fontSize: 10,
                 letterSpacing: "0.12em",
-                color: "#d8b860",
+                color: colors.accent,
               }}
             >
               {String(activeIndex + 1).padStart(2, "0")} /{" "}
@@ -298,8 +365,7 @@ export default function WorkPage() {
             <div
               className="h-px w-8"
               style={{
-                background:
-                  "linear-gradient(90deg,#d8b860,transparent)",
+                background: `linear-gradient(90deg,${colors.accent},transparent)`,
               }}
             />
           </div>
@@ -322,8 +388,8 @@ export default function WorkPage() {
             }}
             className="relative overflow-hidden rounded-[1.8rem]"
             style={{
-              border: "1px solid rgba(255,255,255,0.08)",
-              background: "rgba(255,255,255,0.02)",
+              border: `1px solid ${colors.borderLight}`,
+              background: colors.card,
               backdropFilter: "blur(24px)",
             }}
           >
@@ -341,8 +407,7 @@ export default function WorkPage() {
               <div
                 className="absolute inset-0"
                 style={{
-                  background:
-                    "linear-gradient(180deg,rgba(0,0,0,0.08) 0%,transparent 35%,rgba(0,0,0,0.9) 100%)",
+                  background: colors.imageOverlay,
                 }}
               />
 
@@ -350,8 +415,10 @@ export default function WorkPage() {
               <div
                 className="absolute left-3 top-3 rounded-full"
                 style={{
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  background: "rgba(255,255,255,0.05)",
+                  border: `1px solid rgba(255,255,255,0.12)`,
+                  background: isDark
+                    ? "rgba(11,46,51,0.45)"
+                    : "rgba(11,46,51,0.35)",
                   backdropFilter: "blur(12px)",
                   padding: "0.32rem 0.65rem",
                 }}
@@ -359,7 +426,7 @@ export default function WorkPage() {
                 <span
                   style={{
                     fontSize: 9,
-                    color: "rgba(255,255,255,0.7)",
+                    color: "rgba(255,255,255,0.78)",
                   }}
                 >
                   {active.category}
@@ -371,8 +438,10 @@ export default function WorkPage() {
                 <div
                   className="rounded-[1.5rem]"
                   style={{
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    background: "rgba(20,20,30,0.52)",
+                    border: "1px solid rgba(184,227,233,0.14)",
+                    background: isDark
+                      ? "rgba(11,46,51,0.70)"
+                      : "rgba(11,46,51,0.72)",
                     backdropFilter: "blur(24px)",
                     padding: "0.95rem",
                   }}
@@ -384,6 +453,8 @@ export default function WorkPage() {
                       lineHeight: 1,
                       fontWeight: 700,
                       letterSpacing: "-0.06em",
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      color: "#EAF4F4",
                     }}
                   >
                     {active.title}
@@ -395,7 +466,7 @@ export default function WorkPage() {
                     style={{
                       fontSize: "0.72rem",
                       lineHeight: 1.7,
-                      color: "rgba(255,255,255,0.62)",
+                      color: "rgba(234,244,244,0.68)",
                       display: "-webkit-box",
                       WebkitLineClamp: 5,
                       WebkitBoxOrient: "vertical",
@@ -412,12 +483,11 @@ export default function WorkPage() {
                         key={item}
                         className="rounded-full"
                         style={{
-                          border:
-                            "1px solid rgba(255,255,255,0.08)",
-                          background: "rgba(255,255,255,0.04)",
+                          border: "1px solid rgba(184,227,233,0.14)",
+                          background: "rgba(184,227,233,0.06)",
                           padding: "0.22rem 0.58rem",
                           fontSize: 9,
-                          color: "rgba(255,255,255,0.7)",
+                          color: "rgba(234,244,244,0.72)",
                         }}
                       >
                         {item}
@@ -431,11 +501,11 @@ export default function WorkPage() {
                     target="_blank"
                     className="mt-4 flex items-center justify-center gap-2 rounded-full"
                     style={{
-                      background: "#d8b860",
+                      background: colors.accent,
                       padding: "0.82rem 1rem",
                       fontSize: "0.72rem",
                       fontWeight: 700,
-                      color: "#111",
+                      color: "#0B2E33",
                       textDecoration: "none",
                     }}
                   >
@@ -461,8 +531,10 @@ export default function WorkPage() {
                 borderRadius: 9999,
                 background:
                   i === activeIndex
-                    ? "#d8b860"
-                    : "rgba(255,255,255,0.16)",
+                    ? colors.accent
+                    : isDark
+                    ? "rgba(184,227,233,0.16)"
+                    : "rgba(42,107,116,0.18)",
               }}
             />
           ))}
@@ -475,7 +547,7 @@ export default function WorkPage() {
             scrollbarWidth: "none",
           }}
         >
-          <div className="flex gap-2 min-w-max">
+          <div className="flex min-w-max gap-2">
             {PROJECTS.map((project, i) => {
               const isActive = i === activeIndex;
 
@@ -487,18 +559,20 @@ export default function WorkPage() {
                   style={{
                     width: 110,
                     border: isActive
-                      ? "1px solid rgba(216,184,96,0.35)"
-                      : "1px solid rgba(255,255,255,0.05)",
+                      ? `1px solid ${colors.border}`
+                      : `1px solid ${colors.borderLight}`,
                     background: isActive
-                      ? "rgba(216,184,96,0.07)"
-                      : "rgba(255,255,255,0.02)",
+                      ? isDark
+                        ? "rgba(184,227,233,0.07)"
+                        : "rgba(42,107,116,0.08)"
+                      : colors.card,
                     padding: "0.75rem",
                   }}
                 >
                   <p
                     style={{
                       fontSize: 9,
-                      color: "#d8b860",
+                      color: colors.accent,
                       letterSpacing: "0.1em",
                     }}
                   >
@@ -510,6 +584,7 @@ export default function WorkPage() {
                     style={{
                       fontSize: 12,
                       fontWeight: 500,
+                      color: colors.text,
                     }}
                   >
                     {project.title}
@@ -519,10 +594,10 @@ export default function WorkPage() {
                     className="mt-1"
                     style={{
                       fontSize: 9,
-                      color: "rgba(255,255,255,0.42)",
+                      color: colors.textMuted,
                     }}
                   >
-                    [{project.years}]
+                    [{project.year}]
                   </p>
                 </button>
               );
@@ -531,14 +606,17 @@ export default function WorkPage() {
         </div>
       </div>
 
-      {/* PC */}
-      <div className="hidden lg:flex h-screen p-2 xl:p-3">
+      {/* =========================
+          DESKTOP
+      ========================== */}
+      <div className="hidden h-screen p-2 xl:p-3 lg:flex">
         <div
           className="flex w-full overflow-hidden rounded-[2rem]"
           style={{
-            border: "1px solid rgba(255,255,255,0.1)",
-            background:
-              "linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))",
+            border: `1px solid ${colors.border}`,
+            background: isDark
+              ? "linear-gradient(180deg,rgba(79,124,130,0.10),rgba(79,124,130,0.04))"
+              : "linear-gradient(180deg,rgba(79,124,130,0.08),rgba(79,124,130,0.04))",
             backdropFilter: "blur(24px)",
           }}
         >
@@ -547,7 +625,7 @@ export default function WorkPage() {
             className="relative flex flex-col justify-between"
             style={{
               width: "40%",
-              borderRight: "1px solid rgba(255,255,255,0.06)",
+              borderRight: `1px solid ${colors.borderLight}`,
               padding: "3rem",
             }}
           >
@@ -556,8 +634,10 @@ export default function WorkPage() {
               <div
                 className="inline-flex rounded-full"
                 style={{
-                  border: "1px solid rgba(216,184,96,0.18)",
-                  background: "rgba(216,184,96,0.05)",
+                  border: `1px solid ${colors.border}`,
+                  background: isDark
+                    ? "rgba(184,227,233,0.05)"
+                    : "rgba(42,107,116,0.05)",
                   padding: "0.48rem 0.9rem",
                 }}
               >
@@ -565,7 +645,7 @@ export default function WorkPage() {
                   style={{
                     fontSize: 10,
                     letterSpacing: "0.16em",
-                    color: "#d8b860",
+                    color: colors.accent,
                   }}
                 >
                   FEATURED WORK
@@ -583,16 +663,15 @@ export default function WorkPage() {
                   <motion.div
                     key={project.title}
                     onHoverStart={() => setActiveIndex(i)}
-                    className="flex items-center justify-between cursor-pointer"
+                    className="flex cursor-pointer items-center justify-between"
                     animate={{
-                      opacity:
-                        isActive
-                          ? 1
-                          : distance === 1
-                          ? 0.5
-                          : distance === 2
-                          ? 0.24
-                          : 0.1,
+                      opacity: isActive
+                        ? 1
+                        : distance === 1
+                        ? 0.5
+                        : distance === 2
+                        ? 0.24
+                        : 0.1,
                     }}
                   >
                     <motion.h2
@@ -611,9 +690,10 @@ export default function WorkPage() {
                         lineHeight: 0.95,
                         letterSpacing: "-0.08em",
                         color: isActive
-                          ? "#fff"
-                          : "rgba(228,214,183,0.55)",
+                          ? colors.text
+                          : colors.textSecondary,
                         fontWeight: 500,
+                        fontFamily: "'Space Grotesk', sans-serif",
                       }}
                     >
                       {project.title}
@@ -622,10 +702,10 @@ export default function WorkPage() {
                     <span
                       style={{
                         fontSize: 12,
-                        color: "#d8b860",
+                        color: colors.accent,
                       }}
                     >
-                      [{project.years}]
+                      [{project.year}]
                     </span>
                   </motion.div>
                 );
@@ -638,7 +718,7 @@ export default function WorkPage() {
                 <span
                   style={{
                     fontSize: 13,
-                    color: "#d8b860",
+                    color: colors.accent,
                   }}
                 >
                   {String(activeIndex + 1).padStart(2, "0")} /{" "}
@@ -648,7 +728,9 @@ export default function WorkPage() {
                 <div
                   className="h-[3px] flex-1 overflow-hidden rounded-full"
                   style={{
-                    background: "rgba(255,255,255,0.05)",
+                    background: isDark
+                      ? "rgba(184,227,233,0.07)"
+                      : "rgba(42,107,116,0.08)",
                   }}
                 >
                   <motion.div
@@ -656,13 +738,14 @@ export default function WorkPage() {
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{
-                      duration: 5,
+                      duration: 7,
                       ease: "linear",
                     }}
                     style={{
                       transformOrigin: "left",
+                      background: colors.accent,
                     }}
-                    className="h-full w-full bg-[#d8b860]"
+                    className="h-full w-full"
                   />
                 </div>
               </div>
@@ -671,7 +754,7 @@ export default function WorkPage() {
                 className="mt-4"
                 style={{
                   fontSize: 13,
-                  color: "rgba(255,255,255,0.55)",
+                  color: colors.textSecondary,
                 }}
               >
                 {active.category}
@@ -708,7 +791,7 @@ export default function WorkPage() {
                 }}
                 className="relative h-[88%] w-full overflow-hidden rounded-[2rem]"
                 style={{
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  border: `1px solid ${colors.borderLight}`,
                 }}
               >
                 {/* IMAGE */}
@@ -724,8 +807,7 @@ export default function WorkPage() {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background:
-                      "linear-gradient(180deg,rgba(0,0,0,0.08) 0%,transparent 38%,rgba(0,0,0,0.88) 100%)",
+                    background: colors.imageOverlay,
                   }}
                 />
 
@@ -733,8 +815,8 @@ export default function WorkPage() {
                 <div
                   className="absolute left-5 top-5 rounded-full"
                   style={{
-                    border: "1px solid rgba(255,255,255,0.12)",
-                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(234,244,244,0.16)",
+                    background: "rgba(11,46,51,0.38)",
                     padding: "0.48rem 0.95rem",
                     backdropFilter: "blur(10px)",
                   }}
@@ -742,7 +824,7 @@ export default function WorkPage() {
                   <span
                     style={{
                       fontSize: 10,
-                      color: "rgba(255,255,255,0.72)",
+                      color: "rgba(234,244,244,0.76)",
                     }}
                   >
                     {active.category}
@@ -754,9 +836,10 @@ export default function WorkPage() {
                   <div
                     className="rounded-[1.8rem]"
                     style={{
-                      border:
-                        "1px solid rgba(255,255,255,0.08)",
-                      background: "rgba(15,15,25,0.46)",
+                      border: "1px solid rgba(184,227,233,0.14)",
+                      background: isDark
+                        ? "rgba(11,46,51,0.68)"
+                        : "rgba(11,46,51,0.72)",
                       backdropFilter: "blur(24px)",
                       padding: "1.4rem",
                     }}
@@ -770,6 +853,8 @@ export default function WorkPage() {
                             fontWeight: 700,
                             lineHeight: 1,
                             letterSpacing: "-0.07em",
+                            fontFamily: "'Space Grotesk', sans-serif",
+                            color: "#EAF4F4",
                           }}
                         >
                           {active.title}
@@ -780,7 +865,7 @@ export default function WorkPage() {
                           style={{
                             fontSize: "0.9rem",
                             lineHeight: 1.8,
-                            color: "rgba(255,255,255,0.65)",
+                            color: "rgba(234,244,244,0.68)",
                           }}
                         >
                           {active.description}
@@ -794,13 +879,12 @@ export default function WorkPage() {
                               className="rounded-full"
                               style={{
                                 border:
-                                  "1px solid rgba(255,255,255,0.08)",
+                                  "1px solid rgba(184,227,233,0.14)",
                                 background:
-                                  "rgba(255,255,255,0.04)",
+                                  "rgba(184,227,233,0.06)",
                                 padding: "0.32rem 0.8rem",
                                 fontSize: 11,
-                                color:
-                                  "rgba(255,255,255,0.72)",
+                                color: "rgba(234,244,244,0.72)",
                               }}
                             >
                               {item}
@@ -815,11 +899,11 @@ export default function WorkPage() {
                         target="_blank"
                         className="flex items-center gap-2 rounded-full"
                         style={{
-                          background: "#d8b860",
+                          background: colors.accent,
                           padding: "0.95rem 1.4rem",
                           fontSize: "0.82rem",
                           fontWeight: 700,
-                          color: "#111",
+                          color: "#0B2E33",
                           textDecoration: "none",
                           whiteSpace: "nowrap",
                         }}
