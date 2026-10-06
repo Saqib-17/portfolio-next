@@ -32,7 +32,7 @@ export function ContactForm() {
     try {
       await emailjs.sendForm(
         "service_5pyc4ow",
-        "template_4ag48zb",
+        "template_j1nqhhr",
         formRef.current,
         {
           publicKey: "Gt8sMkrzyk0go93fx",
