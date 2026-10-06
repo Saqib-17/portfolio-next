@@ -8,10 +8,10 @@ import { useTheme } from "@/contexts/theme-context";
 
 const PROJECTS = [
    {
-    title: "Multi-StageVehicle Detection Under Foggy Conditions: A comparative study of YOLOv8s and YOLOv10s for multi-stage vehicle detection under foggy conditions",
+    title: "Multi-StageVehicle Detection Under Foggy Conditions: A comparative study of YOLOv8s and YOLOv10s",
     category: "Undergraduate Thesis",
     description:
-      "This research paper presents a comparative study of YOLOv8s and YOLOv10s for multi-stage vehicle detection under foggy conditions. The study evaluates the performance of both models in terms of accuracy, speed, and robustness, providing insights into their suitability for real-world applications in adverse weather conditions.",
+      "A comparative study of YOLOv8s and YOLOv10s for detecting vehicles under different foggy conditions. The study explores curriculum training and lightweight image preprocessing to improve detection performance in challenging visibility.",
     tech: ["YOLOv8s", "YOLOv10s", "Python", "Computer Vision"],
     link: "/Multi-Stage_vehicle_Detection_under_Foggy_condition.pdf",
     image: "/images/research.jpg",
