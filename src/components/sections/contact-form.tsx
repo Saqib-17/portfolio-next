@@ -41,10 +41,11 @@ export function ContactForm() {
 
       setStatus("success");
       formRef.current.reset();
-    } catch (error) {
-      console.error("EmailJS error:", error);
-      setStatus("error");
-    }
+   } catch (error) {
+  console.error("EmailJS error:", error);
+  console.error("EmailJS error details:", JSON.stringify(error, null, 2));
+  setStatus("error");
+}
   }
 
   const inp = {
