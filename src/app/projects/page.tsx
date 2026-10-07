@@ -235,16 +235,16 @@ export default function WorkPage() {
     return () => clearInterval(interval);
   }, []);
 
-  /* PAGINATION */
-  const paginate = (direction) => {
-    if (direction > 0) {
-      setActiveIndex((prev) => (prev + 1) % PROJECTS.length);
-    } else {
-      setActiveIndex((prev) =>
-        prev === 0 ? PROJECTS.length - 1 : prev - 1
-      );
-    }
-  };
+/* PAGINATION */
+const paginate = (direction: number) => {
+  if (direction > 0) {
+    setActiveIndex((prev) => (prev + 1) % PROJECTS.length);
+  } else {
+    setActiveIndex((prev) =>
+      prev === 0 ? PROJECTS.length - 1 : prev - 1
+    );
+  }
+};
 
   /* SWIPE */
   const handleDragEnd = (_, info) => {
