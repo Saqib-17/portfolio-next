@@ -12,33 +12,7 @@ export function Hero() {
   const c2 = isDark ? "#93B1B5" : "#3D7D87";
   const c3 = isDark ? "#4F7C82" : "#5A9EA8";
 
-  const lines = [
-    {
-      label: "Who am I?",
-      code: 'const me = "Sakib, a developer"',
-      color: c1,
-    },
-    {
-      label: "My mood?",
-      code: "if (coffee) { code(); } else { nap(); }",
-      color: c2,
-    },
-    {
-      label: "My stack?",
-      code: 'const stack = ["React","Node","MongoDB"]',
-      color: c3,
-    },
-    {
-      label: "Open to work?",
-      code: "return available === true // yes",
-      color: c1,
-    },
-    {
-      label: "My goal?",
-      code: 'buildApp("beautiful","fast","scalable")',
-      color: c2,
-    },
-  ];
+
 
   return (
     <section

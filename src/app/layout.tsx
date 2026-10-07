@@ -4,32 +4,59 @@ import type { ReactNode } from "react";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/theme-context";
 
+const siteUrl = "https://saqibdevportfolio.vercel.app";
+
 export const metadata: Metadata = {
-  title: "MD. Shahidul Islam Sakib | MERN Stack Developer",
+  metadataBase: new URL(siteUrl),
+
+  title: {
+    default: "Saqib | MERN Stack Developer",
+    template: "%s | Saqib",
+  },
 
   description:
-    "Full-stack developer portfolio of MD. Shahidul Islam Sakib, a MERN Stack Developer from Chattogram, Bangladesh.",
+    "Saqib — Md. Shahidul Islam Sakib, a MERN Stack Developer from Chattogram, Bangladesh, building modern full-stack web applications.",
+
+  authors: [
+    {
+      name: "Md. Shahidul Islam Sakib",
+      url: siteUrl,
+    },
+  ],
+
+  creator: "Md. Shahidul Islam Sakib",
 
   alternates: {
-    canonical: "https://saqibdevportfolio.vercel.app/",
+    canonical: "/",
   },
 
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 
   openGraph: {
-    title: "MD. Shahidul Islam Sakib | MERN Stack Developer",
-
+    title: "Saqib | MERN Stack Developer",
     description:
-      "Full-stack developer portfolio of MD. Shahidul Islam Sakib, a MERN Stack Developer from Chattogram, Bangladesh.",
-
-    url: "https://saqibdevportfolio.vercel.app/",
-
-    siteName: "MD. Shahidul Islam Sakib",
-
+      "Saqib — Md. Shahidul Islam Sakib, a MERN Stack Developer from Chattogram, Bangladesh.",
+    url: siteUrl,
+    siteName: "Saqib",
+    locale: "en_US",
     type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Saqib | MERN Stack Developer",
+    description:
+      "Saqib — Md. Shahidul Islam Sakib, a MERN Stack Developer from Chattogram, Bangladesh.",
   },
 };
 
