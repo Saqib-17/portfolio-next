@@ -3,7 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  type PanInfo,
+} from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useTheme } from "@/contexts/theme-context";
 
@@ -247,7 +251,7 @@ const paginate = (direction: number) => {
 };
 
   /* SWIPE */
-  const handleDragEnd = (_, info) => {
+const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const threshold = 80;
 
     if (info.offset.x < -threshold) {
